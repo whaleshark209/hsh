@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>🎬 Movie Finder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 헤더(상단 고정) -->
+  <header class="header">
+    <div class="hwrap">
+      <div class="brand" id="homeBtn" title="초기 화면으로 돌아가기">
+        <div class="logo">🎬</div>
+        <span class="brand-name">Movie Finder</span>
+      </div>
+      <div class="header-actions">
+        <button id="openBtn" class="icon-btn search" aria-label="Search" title="검색"></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 검색 패널(기본 숨김) -->
+  <div id="panel" class="panel" hidden>
+    <div class="row row-top">
+      <button id="clearAllBtn" class="clear-all">카테고리 전부 지우기</button>
+      <button id="closeBtn" class="search-btn" style="margin-left:auto">닫기 ✕</button>
+    </div>
+    <div class="row">
+      <div id="tokenList" class="token-input" style="margin-right:auto"></div>
+      <input id="query" type="text" placeholder="검색어 입력 후 Enter..." />
+    </div>
+    <div class="grid">
+      <div class="col">
+        <div class="section">장르</div>
+        <div id="chipsGenre" class="chips"></div>
+      </div>
+      <div class="col">
+        <div class="section">국가</div>
+        <div id="chipsRegion" class="chips"></div>
+      </div>
+      <div class="col">
+        <div class="section">테마</div>
+        <div id="chipsTheme" class="chips"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 선택한 영화 섹션 -->
+  <section id="selectionArea" class="selection-area">
+    <div class="selection-top">
+      <div class="sel-left">
+        <h2 class="section-title">선택한 영화 <span id="selCountTop">(0/10)</span></h2>
+      </div>
+      <div class="sel-right">
+        <button id="clearSelections" class="btn-ghost small">모두 해제</button>
+      </div>
+    </div>
+    <div id="selectedTitles" class="selected-chips" aria-live="polite"></div>
+  </section>
+
+  <!-- 영화 목록 -->
+  <main>
+    <p id="status" class="hint">초기화 중…</p>
+    <div id="movie-list" class="movie-grid"></div>
+    <div id="sentinel" style="height:120px"></div>
+  </main>
+
+  <!-- 하단 고정 바 -->
+  <footer class="bottom-bar">
+    <div class="bottom-inner">
+      <span id="selCountBottom">0/10 선택됨</span>
+    </div>
+  </footer>
+
+  <!-- 페이드/트레일러 모달 -->
+  <div class="fade-overlay"></div>
+  <div id="trailerModal" class="trailer-modal" hidden>
+    <div class="video-box">
+      <iframe id="trailerFrame" allow="autoplay; encrypted-media; picture-in-picture"
+              referrerpolicy="origin-when-cross-origin"></iframe>
+    </div>
+    <aside class="info-panel">
+      <button id="modalClose" class="modal-close" aria-label="닫기">✕</button>
+      <h2 id="infoTitle" class="info-title"></h2>
+      <div id="infoMeta" class="info-meta"></div>
+      <p id="infoOverview" class="info-overview"></p>
+    </aside>
+  </div>
+
+  <!-- 캐시 무효화 + defer -->
+  <script src="script.js?v=2025-11-11-1" defer></script>
+  <noscript style="color:#f66;display:block;text-align:center;margin:10px 0;">
+    JavaScript가 꺼져 있어요. 기능이 작동하지 않습니다.
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,107 @@
+:root{
+  --bg:#0d0d0d; --panel:#1a1a1a; --text:#f5f5f5; --muted:#9aa0a6;
+  --line:#2a2a2a; --chip:#222; --accent:#ffffff; --shadow:0 12px 40px rgba(0,0,0,.55);
+  --panelW:360px;
+  /* 포스터 1장 기준폭(양옆 여백) */
+  --posterW:190px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Pretendard,Roboto,Segoe UI,sans-serif}
+
+/* Header */
+.header{position:sticky;top:0;z-index:60;background:rgba(13,13,13,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hwrap{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+.brand{display:flex;align-items:center;gap:10px;cursor:pointer}
+.logo{width:36px;height:36px;border-radius:12px;background:#111827;color:#fff;display:grid;place-items:center;font-weight:700;font-size:18px}
+.brand-name{font-weight:700}
+.header-actions{display:flex;align-items:center;gap:10px}
+.icon-btn.search{
+  width:40px;height:40px;border:1px solid var(--line);border-radius:10px;
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='7'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>")
+    center/22px 22px no-repeat, linear-gradient(transparent,transparent);
+  background-color:transparent;color:var(--text);cursor:pointer;
+}
+.icon-btn.search:hover{background-color:#1f1f1f}
+
+/* Search Panel */
+.panel{position:fixed; right:50px; top:80px; width:min(92vw,1100px); z-index:1000;
+  background:var(--panel); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); overflow:hidden}
+.row{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.row-top{justify-content:flex-start}
+.search-btn{border:0;background:transparent;color:var(--text);padding:8px;border-radius:10px;cursor:pointer}
+.search-btn:hover{background:#1f1f1f}
+#query{width:300px;border:1px solid var(--line);border-radius:8px;outline:0;padding:6px 8px;background:var(--chip);color:var(--text);font-size:14px;text-align:left;margin-left:auto}
+.clear-all{display:inline-block;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:#202020;color:#ddd;font-size:13px;cursor:pointer}
+.clear-all:hover{background:#2a2a2a}
+.token-input{display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:6px}
+.token-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:999px;background:var(--chip);border:1px solid var(--line);font-size:12px;color:var(--text)}
+.token-chip button{all:unset;cursor:pointer;display:grid;place-items:center;width:16px;height:16px;border-radius:50%;color:#bbb}
+.token-chip button:hover{background:#2b2b2b}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+@media(max-width:1000px){.grid{grid-template-columns:1fr}}
+.col{border-right:1px solid var(--line)} .col:last-child{border-right:0}
+.section{padding:12px;border-bottom:1px solid var(--line);color:#ddd}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:12px}
+.chip{padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:#202020;color:#ddd;cursor:pointer;font-size:13px}
+.chip:hover{background:#2a2a2a}
+
+/* 선택한 영화 섹션 */
+.selection-area{position:sticky;top:64px;z-index:50;background:rgba(13,13,13,.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.selection-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px}
+.section-title{margin:0;font-size:16px}
+.sel-right{display:flex;align-items:center;gap:8px}
+.btn-ghost{padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:#202020;color:#ddd;cursor:pointer}
+.btn-ghost.small{padding:6px 10px;font-size:13px}
+.btn-ghost:hover{background:#2a2a2a}
+.selected-chips{display:flex;flex-wrap:wrap;gap:8px;padding:8px 16px}
+.sel-chip{display:inline-flex;align-items:center;gap:6px;background:#0f0f0f;border:1px solid var(--line);color:#e8e8e8;padding:6px 10px;border-radius:999px;font-size:13px}
+.sel-chip button{all:unset;cursor:pointer;color:#bbb;padding:0 4px;border-radius:6px}
+.sel-chip button:hover{background:#2b2b2b}
+
+/* 메인 그리드: 4→3→2→1열 */
+main{padding:20px}
+.hint{color:var(--muted);font-size:13px;margin:8px 2px}
+.movie-grid{display:grid;gap:18px;grid-template-columns:repeat(4,1fr)}
+@media (max-width:1200px){.movie-grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:900px){.movie-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:580px){.movie-grid{grid-template-columns:repeat(1,1fr)}}
+
+/* ✅ 좌우 여백 강제: 컨테이너 id/class 모두에 적용 */
+.movie-grid, #movie-list{padding-left:var(--posterW);padding-right:var(--posterW)}
+@media (max-width:580px){.movie-grid,#movie-list{padding-left:16px;padding-right:16px}}
+
+/* 카드 */
+.card{position:relative;overflow:hidden;border-radius:12px;cursor:pointer;background:#0a0a0a;border:1px solid var(--line);transition:transform .5s ease, box-shadow .5s ease}
+.card img.thumb{width:100%;display:block;border-radius:inherit;aspect-ratio:2/3;object-fit:cover;background:#111}
+.card .meta{position:absolute;left:0;right:0;bottom:0;padding:8px 10px;background:linear-gradient(to top, rgba(0,0,0,.85), transparent)}
+.card .title{font-size:15px;font-weight:600}
+.card .sub{font-size:12px;color:#bbb}
+.card.selected{outline:3px solid var(--accent)}
+.card.hover-zoom{transform:scale(2.0);z-index:5;box-shadow:0 0 40px rgba(0,0,0,0.85)}
+.card .scorebar{position:absolute;left:10px;right:10px;bottom:42px;height:6px;border-radius:999px;background:rgba(255,255,255,0.08);overflow:hidden}
+.card .scorebar .fill{height:100%;background:#fff;opacity:.85;transform-origin:left center;transform:scaleX(0);transition:transform .25s ease}
+
+/* 하단 고정 바 */
+.bottom-bar{position:sticky;bottom:0;z-index:55;background:rgba(13,13,13,.92);border-top:1px solid var(--line);backdrop-filter:blur(8px)}
+.bottom-inner{display:flex;align-items:center;justify-content:center;gap:12px;padding:10px 16px;color:#e8e8e8;font-size:14px}
+
+/* 페이드 & 트레일러 모달 */
+.fade-overlay{position:fixed;inset:0;z-index:4;pointer-events:none;opacity:0;transition:opacity .4s ease;background-color:rgba(0,0,0,0.7);background-image:radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);background-size:3px 3px}
+.fade-overlay.active{opacity:1}
+.trailer-modal{position:fixed;inset:0;z-index:1001;background:rgba(0,0,0,0.55);backdrop-filter:blur(2px);display:block}
+.trailer-modal[hidden]{display:none}
+.video-box{
+  position:absolute; left:calc(50% - var(--panelW)/2); top:50%; transform:translate(-50%,-50%);
+  width:min(calc(80vw - var(--panelW)), calc(80vh * 16 / 9));
+  max-width:calc(100vw - var(--panelW) - 40px);
+  aspect-ratio:16/9; background:#000; border-radius:14px; overflow:hidden; box-shadow:var(--shadow);
+}
+.video-box iframe{width:100%;height:100%;border:0}
+.info-panel{position:absolute; right:0; top:0; bottom:0; width:var(--panelW); background:rgba(0,0,0,0.6); color:#fff; padding:16px 16px 24px; overflow:auto; border-left:1px solid rgba(255,255,255,0.08)}
+.modal-close{position:absolute; top:10px; right:10px; border:1px solid rgba(255,255,255,0.2); background:rgba(0,0,0,0.35); color:#fff; border-radius:8px; padding:6px 10px; cursor:pointer}
+.modal-close:hover{background:rgba(255,255,255,0.08)}
+.info-title{margin:36px 0 6px;font-size:20px;font-weight:700}
+.info-meta{color:#cfd2d8;font-size:13px;margin-bottom:10px}
+.info-overview{color:#e7e7e7;line-height:1.6;font-size:14px;white-space:pre-wrap}
